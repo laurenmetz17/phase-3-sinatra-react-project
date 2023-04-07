@@ -13,4 +13,9 @@ class ApplicationController < Sinatra::Base
     inventory.to_json
   end
 
+  get "/inventory/count" do 
+    count = Shoe.all.count
+    count.to_json
+  end
+
 end
