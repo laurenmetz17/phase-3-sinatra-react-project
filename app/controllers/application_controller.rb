@@ -18,4 +18,9 @@ class ApplicationController < Sinatra::Base
     count.to_json
   end
 
+  get "/stores" do
+    stores = ShoesStore.all
+    stores.to_json
+  end
+
 end
