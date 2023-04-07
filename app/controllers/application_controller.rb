@@ -18,9 +18,21 @@ class ApplicationController < Sinatra::Base
     count.to_json
   end
 
-  get "/stores" do
-    stores = ShoesStore.all
+  get "/shoe_stores" do
+    stores = ShoeStore.all
     stores.to_json
+  end
+
+  post '/inventory' do
+    shoe = Shoe.create(
+      name: params[:name],
+      style: parmas[:style],
+      price: params[:price],
+      color: params[:color],
+      shoe_store_id: params[:shoe_store_id]
+    )
+
+    shoe.to_json
   end
 
 end
