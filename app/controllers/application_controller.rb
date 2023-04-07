@@ -23,6 +23,11 @@ class ApplicationController < Sinatra::Base
     stores.to_json
   end
 
+  get "/shoe_stores/:id" do 
+    store = ShoeStore.find(params[:id])
+    store.to_json
+  end
+
   post '/inventory' do
     shoe = Shoe.create(
       name: params[:name],
@@ -33,6 +38,14 @@ class ApplicationController < Sinatra::Base
     )
 
     shoe.to_json
+  end
+
+  ##add patch
+
+  delete '/shoe_stores/:id' do
+    store = Store.find(params[:id])
+    store.destroy
+    store.to_json
   end
 
 end
