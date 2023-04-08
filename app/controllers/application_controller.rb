@@ -42,8 +42,14 @@ class ApplicationController < Sinatra::Base
 
   ##add patch
 
+  delete '/inventory/:id' do
+    shoe = Shoe.find(params[:id])
+    shoe.destroy
+    shoe.to_json
+  end
+
   delete '/shoe_stores/:id' do
-    store = Store.find(params[:id])
+    store = ShoeStore.find(params[:id])
     store.destroy
     store.to_json
   end
