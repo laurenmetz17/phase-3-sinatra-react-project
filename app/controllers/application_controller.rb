@@ -2,8 +2,7 @@
 
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
-  
-  # Add your routes here
+
   get "/" do
     { message: "Good luck with your project!" }.to_json
   end
@@ -29,9 +28,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/inventory' do
+
     shoe = Shoe.create(
       name: params[:name],
-      style: parmas[:style],
+      style: params[:style],
       price: params[:price],
       color: params[:color],
       shoe_store_id: ShoeStore.id_by_name(params[:shoe_store_id])
@@ -64,8 +64,6 @@ class ApplicationController < Sinatra::Base
     )
     store.to_json
   end
-
-  
 
   delete '/inventory/:id' do
     shoe = Shoe.find(params[:id])
