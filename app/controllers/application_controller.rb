@@ -34,13 +34,38 @@ class ApplicationController < Sinatra::Base
       style: parmas[:style],
       price: params[:price],
       color: params[:color],
-      shoe_store_id: params[:shoe_store_id]
+      shoe_store_id: ShoeStore.id_by_name(params[:shoe_store_id])
     )
 
     shoe.to_json
   end
 
-  ##add patch
+  post '/shoe_stores' do
+    store = ShoeStore.create(
+      name: params[:name],
+      address: params[:address]
+    )
+
+    store.to_json
+  end
+
+  patch '/inventory/:id' do
+    shoe = Shoe.find(params[:id])
+    shoe.update(
+      price: params[:price]
+    )
+    shoe.to_json
+  end
+
+  patch '/shoe_stores/:id' do
+    store = ShoeStore.find(params[:id])
+    store.update(
+      address: params[:address]
+    )
+    store.to_json
+  end
+
+  
 
   delete '/inventory/:id' do
     shoe = Shoe.find(params[:id])
