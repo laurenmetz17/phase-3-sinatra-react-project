@@ -22,6 +22,11 @@ class ApplicationController < Sinatra::Base
     stores.to_json
   end
 
+  get "/inventory/:id" do 
+    shoe = Shoe.find(params[:id])
+    shoe.to_json
+  end
+
   get "/shoe_stores/:id" do 
     store = ShoeStore.find(params[:id])
     store.to_json
