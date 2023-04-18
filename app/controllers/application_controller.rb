@@ -22,24 +22,23 @@ class ApplicationController < Sinatra::Base
     stores.to_json
   end
 
+  get "/shoe_stores/:id" do 
+    store = ShoeStore.find(params[:id])
+    store.to_json(include: :shoes)
+  end
+
   get "/inventory/:id" do 
     shoe = Shoe.find(params[:id])
     shoe.to_json
   end
 
-  get "/shoe_stores/:id" do 
-    store = ShoeStore.find(params[:id])
-    store.to_json
-  end
-
   post '/inventory' do
-
-    shoe = Shoe.create(
+    shoe_store = ShoeStore.find_by(params[:shoe_store_id])
+    shoe = shoe_store.shoes.create(
       name: params[:name],
       style: params[:style],
       price: params[:price],
-      color: params[:color],
-      shoe_store_id: ShoeStore.id_by_name(params[:shoe_store_id])
+      color: params[:color]
     )
 
     shoe.to_json
