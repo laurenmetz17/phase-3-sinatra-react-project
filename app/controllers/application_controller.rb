@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
 
   get "/shoe_stores" do
     stores = ShoeStore.all
-    stores.to_json
+    stores.to_json(include: :shoes)
   end
 
   get "/shoe_stores/:id" do 
