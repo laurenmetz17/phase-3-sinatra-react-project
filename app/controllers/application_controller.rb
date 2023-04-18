@@ -7,12 +7,12 @@ class ApplicationController < Sinatra::Base
     { message: "Good luck with your project!" }.to_json
   end
 
-  get "/inventory" do
+  get "/shoes" do
     inventory = Shoe.all
     inventory.to_json
   end
 
-  get "/inventory/count" do 
+  get "/shoes/count" do 
     count = Shoe.all.count
     count.to_json
   end
@@ -27,12 +27,12 @@ class ApplicationController < Sinatra::Base
     store.to_json(include: :shoes)
   end
 
-  get "/inventory/:id" do 
+  get "/shoes/:id" do 
     shoe = Shoe.find(params[:id])
     shoe.to_json
   end
 
-  post '/inventory' do
+  post '/shoes' do
     shoe_store = ShoeStore.find_by(params[:shoe_store_id])
     shoe = shoe_store.shoes.create(
       name: params[:name],
@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
     store.to_json
   end
 
-  patch '/inventory/:id' do
+  patch '/shoes/:id' do
     shoe = Shoe.find(params[:id])
     shoe.update(
       price: params[:price]
@@ -69,7 +69,7 @@ class ApplicationController < Sinatra::Base
     store.to_json
   end
 
-  delete '/inventory/:id' do
+  delete '/shoes/:id' do
     shoe = Shoe.find(params[:id])
     shoe.destroy
     shoe.to_json
