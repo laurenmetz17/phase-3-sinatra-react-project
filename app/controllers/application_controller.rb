@@ -12,19 +12,9 @@ class ApplicationController < Sinatra::Base
     inventory.to_json
   end
 
-  get "/shoes/count" do 
-    count = Shoe.all.count
-    count.to_json
-  end
-
   get "/shoe_stores" do
     stores = ShoeStore.all
     stores.to_json(include: :shoes)
-  end
-
-  get "/shoe_stores/:id" do 
-    store = ShoeStore.find(params[:id])
-    store.to_json(include: :shoes)
   end
 
   get "/shoes/:id" do 
@@ -39,9 +29,7 @@ class ApplicationController < Sinatra::Base
       style: params[:style],
       price: params[:price],
       color: params[:color]
-
     )
-
     shoe.to_json
   end
 
@@ -50,7 +38,6 @@ class ApplicationController < Sinatra::Base
       name: params[:name],
       address: params[:address]
     )
-
     store.to_json
   end
 
