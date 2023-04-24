@@ -33,12 +33,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/shoes' do
-    shoe_store = ShoeStore.find_by(params[:shoe_store_id])
+    shoe_store = ShoeStore.find_by(id: params[:shoe_store_id])
     shoe = shoe_store.shoes.create(
       name: params[:name],
       style: params[:style],
       price: params[:price],
       color: params[:color]
+
     )
 
     shoe.to_json
